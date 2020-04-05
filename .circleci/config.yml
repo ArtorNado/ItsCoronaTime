@@ -100,12 +100,6 @@ workflows:
           filters:
             tags:
               only: /^.*/
-      - test_unit:
-          requires:
-            - dependencies
-          filters:
-            tags:
-              only: /^.*/
       - linter:
           requires:
             - detekt
