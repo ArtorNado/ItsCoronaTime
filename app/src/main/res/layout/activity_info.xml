@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.itscoronatime.infoActivity.presentation.viewModel.InfoViewModel" />
+            type="com.example.itscoronatime.infoActivity.presentation.InfoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -8,26 +8,42 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.itscoronatime.R
+import com.example.itscoronatime.app.injector.Injector
 import com.example.itscoronatime.databinding.ActivityInfoBinding
-import com.example.itscoronatime.infoActivity.presentation.viewModel.InfoViewModel
+import javax.inject.Inject
 
 class InfoActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private var viewModel: InfoViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityInfoBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_info)
         val arguments: Bundle? = intent.extras
+        val id = arguments?.getInt("id")?: 0
+        Injector.plusInfoComponent(id).injectInfoActivityComponent(this)
+        initViewModel()
+        binding.lifecycleOwner = this
+        binding.viewmodel = viewModel
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Injector.clearInfoActivityComponent()
+    }
+
+    fun initViewModel(){
         val viewModel by lazy {
             ViewModelProvider(
                 this,
-                com.example.itscoronatime.infoActivity.presentation.viewModel.ViewModelFactory(
-                    arguments?.getInt("id") ?: 0
-                )
+                viewModelFactory
             ).get(InfoViewModel::class.java)
         }
-        binding.lifecycleOwner = this
-        binding.viewmodel = viewModel
+        this.viewModel = viewModel
     }
 
     companion object {

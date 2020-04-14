@@ -1,4 +1,4 @@
-package com.example.itscoronatime.api
+package com.example.itscoronatime.api.apiFactory
 
 import com.example.itscoronatime.BuildConfig
 import com.example.itscoronatime.api.ncs.NovelCovidService

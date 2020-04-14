@@ -1,4 +1,4 @@
-package com.example.itscoronatime.navigation
+package com.example.itscoronatime.app.navigation
 
 import android.content.Context
 import com.example.itscoronatime.infoActivity.presentation.InfoActivity
